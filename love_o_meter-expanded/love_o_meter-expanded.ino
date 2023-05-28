@@ -1,4 +1,5 @@
 const int sensorPin1 = A0;
+const int sensorPin2 = A1;
 const float baselineTemp = 22.0;
 
 void setup() {
@@ -16,6 +17,11 @@ void loop() {
   float temperature1 = (voltage1 - .5) * 100;
   print(1, sensorVal1, voltage1, temperature1);
 
+  int sensorVal2 = analogRead(sensorPin2);
+  float voltage2 = (sensorVal2 / 1024.0) * 5.0;
+  float temperature2 = (voltage2 - .5) * 100;
+  print(2, sensorVal2, voltage2, temperature2);
+
   if (temperature1 < baselineTemp + 2) {
     digitalWrite(2, LOW);
     digitalWrite(3, LOW);
@@ -32,6 +38,12 @@ void loop() {
     digitalWrite(2, HIGH);
     digitalWrite(3, HIGH);
     digitalWrite(4, HIGH);
+  }
+
+  if (abs(sensorVal1 - sensorVal2) <= 2) {
+    digitalWrite(5, HIGH);
+  } else {
+    digitalWrite(5, LOW);
   }
 
   delay(1);

@@ -1,8 +1,8 @@
 #include <Servo.h>
 
 Servo myServo;
-int const sensorPin = A0;
-int sensorVal;
+int const potPin = A0;
+int potVal;
 int angle;
 
 void setup() {
@@ -11,10 +11,10 @@ void setup() {
 }
 
 void loop() {
-  int sensorVal = analogRead(sensorPin);
-  Serial.print("Sensor Val: ");
-  Serial.print(sensorVal);
-  angle = map(sensorVal, 0, 1023, 0, 179);
+  int sensorVal = analogRead(potPin);
+  Serial.print("potVal: ");
+  Serial.print(potVal);
+  angle = map(potVal, 0, 1023, 0, 179);
   Serial.print(", angle: ");
   Serial.println(angle);
 
